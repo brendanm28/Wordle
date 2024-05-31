@@ -91,6 +91,9 @@ function main(){
    */
   function getGuess(){
     let turnRow = document.getElementById("turn-"+turn); // variable for that row. 
+    closeCurrentRow(turnRow);
+    turnRow = document.getElementById("turn-"+(turn+1)); // variable for that row. 
+    openNextRow(turnRow);
     let i = 0;
     let tempGuess = [];
     for (const child of turnRow.children) { // collects the divs
@@ -100,6 +103,27 @@ function main(){
     console.log("Turn "+ turn + " guess = "+ guessLetters.toString());
     processGuess();
   } // end getGuess
+  /* OPEN NEXT ROW: openNextRow() lets you type in the next row after clicking enter.
+  * By Jaydon
+  * @param: turnRow;
+  * @return: none;
+  */
+     function openNextRow(turnRow) {
+     for (const child of turnRow.children) { // collects the divs
+        child.firstChild.disabled = false;
+     }
+   }
+
+  /* CLOSE CURRENT ROW: closeCurrentRow() closes the row you just guessed.
+  * By Jaydon
+  * @param: turnRow;
+  * @return: none;
+  */
+    function closeCurrentRow(turnRow) {
+       for (const child of turnRow.children) { // collects the divs
+          child.firstChild.disabled = true;
+       }
+    }
 
   /* PROCESS GUESS: processGuess() checks if the guess is correct.
    * Dylan
